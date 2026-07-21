@@ -1,4 +1,4 @@
-# SViMo Project Website
+# HarmoHOI Project Website
 > This is the repository that contains source code for the [HarmoHOI website](https://Droliven.github.io/HarmoHOI_project).
 
 
