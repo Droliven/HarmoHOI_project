@@ -1,31 +1,31 @@
-# HarmoHOI Project Page (Local)
+# SViMo Project Website
+> This is the repository that contains source code for the [HarmoHOI website](https://Droliven.github.io/HarmoHOI_project).
 
-Local project homepage for **HarmoHOI: Harmonizing Appearance and 3D Motion for Multi-view Hand-Object Interaction Synthesis** (SIGGRAPH Asia 2026, Manuscript ID 1048).
 
-## Open
+- Title: HarmoHOI: Harmonizing Appearance and 3D Motion for Multi-view Hand-Object Interaction Synthesis
+- TL;DR: A novel framework that jointly synthesizes synchronized multi-view HOI videos and globally aligned 3D point tracks.
+- Project page: [https://Droliven.github.io/HarmoHOI_project](https://Droliven.github.io/HarmoHOI_project).
+- arxiv: [https://arxiv.org/abs/2607.17097](https://arxiv.org/abs/2607.17097).
+<!-- - Poster: [static/images/svimo_poster.png](static/images/svimo_poster.png).
+- Slides: [static/pdfs/svimo_slides.pdf](static/pdfs/svimo_slides.pdf).
+- Code: [https://github.com/Droliven/SViMo_code](https://github.com/Droliven/SViMo_code). -->
+- Models: Coming soon.
+- Dataset: Coming soon.
 
-```bash
-open index.html
+---
+
+If you find Nerfies useful for your work please cite:
+```
+@misc{dang2026harmohoiharmonizingappearance3d,
+    title={HarmoHOI: Harmonizing Appearance and 3D Motion for Multi-view Hand-Object Interaction Synthesis},
+    author={Lingwei Dang and Juntong Li and Zonghan Li and Hongwen Zhang and Liang An and Wei Min and Yebin Liu and Qingyao Wu},
+    year={2026},
+    eprint={2607.17097},
+    archivePrefix={arXiv},
+    primaryClass={cs.CV},
+    url={https://arxiv.org/abs/2607.17097},
+}  
 ```
 
-Or serve locally:
-
-```bash
-python3 -m http.server 8000
-# then visit http://localhost:8000
-```
-
-## Rebuild from PPT
-
-```bash
-python3 build_site.py
-```
-
-This extracts demo videos from `harmohoi_260721.pptx`, copies paper figures/PDF, and regenerates `index.html`.
-
-## Layout notes
-
-- Comparison video columns are ordered left→right by slide position as: Source / DaS / SynCamMaster / SV4D 2.0 / Ours / Viewport. Please spot-check against the PPT if any label looks swapped.
-- Videos use `controls` (click to play) instead of autoplay, to keep local browsing responsive with ~180 clips.
-- `Comparison of 3D Motions` clips are center-padded to **1920×1032** during `build_site.py`.
-- Large demo videos remain in `static/videos/` (~485MB). For GitHub Pages, consider [Git LFS](https://git-lfs.github.com/) if the repo feels slow to clone.
+# Website License
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
