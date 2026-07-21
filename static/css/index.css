@@ -1,0 +1,439 @@
+body {
+  font-family: 'DM Sans', 'Noto Sans', sans-serif;
+  color: #1d1d1f;
+  background: #f7f4ef;
+}
+
+.footer .icon-link {
+  font-size: 25px;
+  color: #000;
+}
+
+.link-block a {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.teaser .hero-body {
+  padding-top: 0;
+  padding-bottom: 2rem;
+}
+
+.publication-title {
+  font-family: 'Source Serif 4', Georgia, serif;
+  margin-bottom: 0.4rem !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+}
+
+.brand-mark {
+  width: 72px;
+  height: 72px;
+  border-radius: 18px;
+  box-shadow: 0 6px 18px rgba(15, 92, 76, 0.18);
+  flex: 0 0 auto;
+}
+
+.publication-title .brand {
+  color: #0f5c4c;
+  font-weight: 700;
+  font-size: 3.2rem;
+  letter-spacing: -0.02em;
+}
+
+.publication-subtitle {
+  font-family: 'Source Serif 4', Georgia, serif;
+  color: #2c3e3a;
+  font-weight: 600;
+  font-size: 1.35rem !important;
+  max-width: 920px;
+  margin: 0.6rem auto 1.2rem !important;
+  line-height: 1.35;
+}
+
+.publication-authors {
+  font-family: 'DM Sans', sans-serif;
+}
+
+.publication-authors a {
+  color: hsl(204, 86%, 53%) !important;
+}
+
+.author-block {
+  display: inline-block;
+  margin: 0 0.15rem;
+}
+
+.affiliations {
+  margin-top: 0.6rem;
+  color: #555;
+}
+
+.publication-venue {
+  margin-top: 0.8rem;
+  color: #0f5c4c;
+  font-weight: 700;
+}
+
+.publication-links {
+  margin-top: 1.2rem;
+}
+
+.note {
+  margin-top: 0.8rem;
+  color: #666;
+}
+
+section.banner {
+  background:
+    radial-gradient(1200px 400px at 20% 0%, rgba(15, 92, 76, 0.18), transparent 60%),
+    radial-gradient(900px 360px at 90% 10%, rgba(196, 122, 58, 0.16), transparent 55%),
+    linear-gradient(180deg, #efe8dc 0%, #f7f4ef 100%);
+  color: #1d1d1f;
+}
+
+.teaser-img,
+.method-img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 8px 28px rgba(20, 40, 30, 0.08);
+}
+
+.method-img.secondary {
+  margin-top: 1.5rem;
+}
+
+.fig-caption {
+  margin: 0.75rem auto 0;
+  max-width: 920px;
+  color: #555;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  text-align: justify;
+}
+
+.fig-caption b {
+  color: #0f5c4c;
+}
+
+.intro-fail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 1rem 0 1.2rem;
+  text-align: left;
+}
+
+.intro-fail-card {
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(20, 40, 30, 0.08);
+  border-radius: 12px;
+  padding: 0.85rem;
+}
+
+.intro-fail-card h3 {
+  margin: 0 0 0.55rem;
+  color: #0f5c4c;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.intro-fail-card video {
+  width: 100%;
+  border-radius: 8px;
+  background: #111;
+  display: block;
+}
+
+.fail-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.65rem;
+}
+
+.fail-tag {
+  display: inline-block;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  background: rgba(176, 64, 48, 0.12);
+  color: #9a3428;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.insight-box {
+  margin-top: 1rem;
+  padding: 0.9rem 1rem;
+  border-left: 4px solid #0f5c4c;
+  background: rgba(15, 92, 76, 0.06);
+  border-radius: 0 10px 10px 0;
+  text-align: left;
+}
+
+@media (max-width: 900px) {
+  .intro-fail-grid {
+    grid-template-columns: 1fr;
+  }
+  .brand-mark {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+  }
+}
+
+.teaser-video,
+video.wide,
+video.teaser-video {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  background: #000;
+}
+
+.teaser-cap {
+  margin-top: 0.8rem;
+  color: #555;
+}
+
+.section-desc {
+  color: #555;
+  margin-bottom: 1.5rem !important;
+}
+
+.demo-card {
+  margin: 0 auto 2.2rem;
+  padding: 1.2rem 1rem 1.4rem;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(20, 40, 30, 0.08);
+  border-radius: 12px;
+}
+
+.demo-card .subtitle {
+  margin-bottom: 0.8rem !important;
+  color: #0f5c4c;
+}
+
+.prompt {
+  color: #444;
+  font-size: 0.95rem;
+  margin-bottom: 0.8rem;
+}
+
+.label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #0f5c4c;
+  margin-bottom: 0.35rem;
+  text-align: center;
+}
+
+.view-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 0.8rem;
+}
+
+.view-row.cols-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.view-cell video.thumb,
+video.thumb,
+video.cell {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 6px;
+  background: #111;
+}
+
+.main-video {
+  margin-top: 0.4rem;
+}
+
+.triple-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.7rem;
+  align-items: start;
+}
+
+.triple-grid > div {
+  min-width: 0;
+}
+
+/* Equal display box for RGB / Motion / 3D track despite different native resolutions */
+.triple-grid .media-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  background: #0a0a0a;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.triple-grid .media-frame video.cell {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  border-radius: 0;
+  background: #0a0a0a;
+}
+
+.quad-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.8rem;
+}
+
+.quad-grid > div {
+  min-width: 0;
+}
+
+.quad-grid .media-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1920 / 1032;
+  background: #0a0a0a;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.quad-grid .media-frame video.cell {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  border-radius: 0;
+  background: #0a0a0a;
+}
+
+.comp-grid {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 0.35rem 0.5rem;
+  align-items: center;
+}
+
+.comp-corner {
+  /* empty top-left cell */
+}
+
+.comp-labels {
+  display: grid;
+  gap: 0.35rem;
+  margin-bottom: 0;
+}
+
+.comp-labels.cols-6 {
+  grid-template-columns: repeat(6, 1fr);
+}
+
+.comp-row-wrap {
+  display: contents;
+}
+
+.row-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #0f5c4c;
+  text-align: right;
+  padding-right: 0.35rem;
+  line-height: 1.2;
+}
+
+.comp-row {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0.35rem;
+  margin-bottom: 0;
+}
+
+.comp-row .media-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  background: #0a0a0a;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.comp-row .media-frame video.cell {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  border-radius: 0;
+  background: #0a0a0a;
+}
+
+@media (max-width: 900px) {
+  .publication-title .brand { font-size: 2.4rem; }
+  .triple-grid,
+  .view-row,
+  .view-row.cols-3 {
+    grid-template-columns: 1fr;
+  }
+  .quad-grid {
+    grid-template-columns: 1fr;
+  }
+  .comp-grid {
+    grid-template-columns: 72px 1fr;
+  }
+  .comp-labels.cols-6,
+  .comp-row {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .row-label {
+    font-size: 0.68rem;
+  }
+}
+
+.footer {
+  background: #efe8dc;
+  padding: 2rem 1rem;
+}
+
+.bibtex-card {
+  position: relative;
+  margin: 0 auto;
+  max-width: 920px;
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(20, 40, 30, 0.08);
+  border-radius: 12px;
+  padding: 1rem 1rem 0.8rem;
+}
+
+.bibtex-copy {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 1;
+}
+
+.bibtex-code {
+  margin: 0;
+  padding: 2.2rem 1rem 1rem;
+  overflow-x: auto;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: #1d1d1f;
+  background: transparent;
+  white-space: pre;
+}
+
+.bibtex-code code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}

@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:title" content="HarmoHOI: Harmonizing Appearance and 3D Motion for Multi-view Hand-Object Interaction Synthesis" />
+  <title>HarmoHOI</title>
+  <link rel="icon" type="image/png" href="static/images/favicon.png">
+  <link rel="apple-touch-icon" href="static/images/logo.png">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+</head>
+<body>
+
+  <section class="hero banner">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">
+              <img class="brand-mark" src="static/images/logo.png" alt="HarmoHOI icon"/>
+              <span class="brand">HarmoHOI</span>
+            </h1>
+            <h2 class="title is-2">
+              Harmonizing Appearance and 3D Motion for Multi-view Hand-Object Interaction Synthesis
+            </h2>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">Lingwei Dang<sup>1</sup>,</span>
+            <span class="author-block">Juntong Li<sup>1</sup>,</span>
+            <span class="author-block">Zonghan Li<sup>1</sup>,</span>
+            <span class="author-block">Hongwen Zhang<sup>2</sup>,</span>
+            <span class="author-block">Liang An<sup>3</sup>,</span>
+            <span class="author-block">Wei Min<sup>4</sup>,</span>
+            <span class="author-block">Yebin Liu<sup>3</sup>,</span>
+            <span class="author-block">Qingyao Wu†<sup>1</sup></span>
+            </div>
+            <div class="is-size-6 publication-authors affiliations">
+              <span class="author-block"><sup>1</sup>South China University of Technology</span><br><span class="author-block"><sup>2</sup>Beijing Normal University</span><br><span class="author-block"><sup>3</sup>Tsinghua University</span><br><span class="author-block"><sup>4</sup>Shadow AI</span>
+            </div>
+            <div class="is-size-6 publication-venue">
+              <!-- SIGGRAPH Asia 2026 &nbsp;|&nbsp; Manuscript ID 1048 -->
+               Arxiv preprint, 2026
+            </div>
+            <div class="publication-links">
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2607.17097" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://droliven.github.io/me/" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-home"></i></span>
+                  <span>Home</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://droliven.github.io/HarmoHOI_project" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-code"></i></span>
+                  <span>Codes</span>
+                </a>
+              </span>
+            </div>
+            <p class="is-size-7 note">† Corresponding author</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- <section class="hero teaser">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <img src="static/images/teaser.png" alt="HarmoHOI teaser" class="teaser-img"/>
+      </div>
+    </div>
+  </section> -->
+
+  <section class="hero teaser">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <video class="teaser-video" playsinline muted loop preload="metadata" controls><source src="static/videos/teaser.mp4" type="video/mp4"></video>
+        <p class="has-text-centered is-size-6 teaser-cap">
+          HarmoHOI jointly synthesizes synchronized multi-view HOI videos and globally aligned 3D point tracks.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section hero is-light">
+    <div class="hero-body">
+      <div class="container is-max-desktop has-text-centered">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>Hand-Object Interaction (HOI) synthesis is a cornerstone for animation production and embodied AI. Despite the strong priors of video foundation models, multi-view consistent HOI synthesis remains challenging due to complex hand motions and occlusions. We present <b>HarmoHOI</b>, a unified diffusion framework that jointly and harmoniously generates synchronized multi-view HOI videos and globally aligned 3D point tracks. Our core insight is that robust multi-view consistency fundamentally requires globally aligned 3D geometry and motion. To this end, we propose a Mixture of Multi-view Diffusion Transformer that co-models RGB videos and 3D point tracks. By representing point tracks as pseudo-videos, we align 3D geometric signals with the 2D latent space of foundation models, thereby minimizing the domain gap and easing adaptation of priors. To further ensure geometry consistency, we introduce Global Motion Aligning Diffusion, which refines coarse point tracks into metric-scale, globally aligned 3D trajectories. HarmoHOI enables on-the-fly co-evolution of 2D appearance and 3D motion during denoising. To overcome the scarcity of multi-view HOI data, we employ a hybrid data curriculum learning strategy that successfully transfers generic priors from single-view data to synchronized multi-view generation. Experimental results show that HarmoHOI achieves state-of-the-art performance in visual quality, motion plausibility, and multi-view geometric consistency.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section hero" id="introduction">
+    <div class="hero-body">
+      <div class="container is-max-desktop has-text-centered">
+        <h2 class="title is-3">Introduction</h2>
+        <div class="content has-text-justified">
+          <p>
+            Video foundation models such as <b>Seedance 2.0</b> and <b>WAN 2.7</b> provide strong visual priors for
+            hand–object interaction (HOI) synthesis. In practice, however, directly applying them to HOI still falls short:
+            they often produce <b>hallucinated contacts</b>, <b>poor instruction adherence</b>, <b>geometric distortion</b>,
+            and <b>unrealistic floating motions</b>. More critically, most remain single-view generators and lack explicit,
+            globally aligned 3D geometry–motion awareness, which limits synchronized multi-view consistency under heavy occlusion.
+          </p>
+        </div>
+
+        <div class="intro-fail-grid">
+          <div class="intro-fail-card">
+            <h3>Seedance 2.0</h3>
+            <video playsinline muted loop preload="metadata" controls poster="static/images/intro_seedance_poster.png">
+              <source src="static/videos/intro/seedance.mp4" type="video/mp4">
+            </video>
+            <div class="fail-tags">
+              <span class="fail-tag">Hallucination</span>
+              <span class="fail-tag">Poor instruction adherence</span>
+            </div>
+          </div>
+          <div class="intro-fail-card">
+            <h3>WAN 2.7</h3>
+            <video playsinline muted loop preload="metadata" controls poster="static/images/intro_wan_poster.png">
+              <source src="static/videos/intro/wan.mp4" type="video/mp4">
+            </video>
+            <div class="fail-tags">
+              <span class="fail-tag">Distortion</span>
+              <span class="fail-tag">Unrealistic floating motion</span>
+            </div>
+          </div>
+        </div>
+
+        <p class="is-size-7 has-text-centered" style="color:#666; margin-bottom:1rem;">
+          Prompt: “A person is arranging pieces of wood to form a frame-like structure on a wooden workbench.”
+        </p>
+
+        <img src="static/images/intro_schematic.png" alt="Comparison of novel-view / multi-view video synthesis methods" class="method-img"/>
+        <p class="fig-caption">
+          <b>Comparison of novel-view / multi-view video synthesis methods.</b>
+          Existing paradigms either generate views sequentially or lack joint 3D motion modeling.
+          Our core insight: robust synchronized multi-view consistency requires
+          <b>globally aligned 3D geometry &amp; motion awareness</b>.
+        </p>
+
+        <div class="insight-box content">
+          <p style="margin:0;">
+            <b>HarmoHOI</b> addresses these failure modes by jointly diffusing multi-view RGB videos and
+            globally aligned 3D point tracks, enabling appearance and geometry to co-evolve during denoising.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section hero is-light">
+    <div class="hero-body">
+      <div class="container is-max-desktop has-text-centered">
+        <h2 class="title is-3">Method Overview</h2>
+        <img src="static/images/method.png" alt="HarmoHOI method" class="method-img"/>
+        <div class="content has-text-justified">
+          <p>
+            HarmoHOI is the first synchronized multi-view joint diffusion framework for HOI video and motion synthesis.
+            It integrates a <b>Mixture of Multi-view DiT</b> for joint appearance–motion modeling with
+            <b>Global Motion Aligning Diffusion</b> for 3D trajectory refinement, forming a mutual enhancement loop.
+            A hybrid data and progressive curriculum learning strategy transfers single-view priors to multi-view generation.
+          </p>
+        </div>
+        <img src="static/images/hybrid_data.png" alt="Hybrid data curriculum" class="method-img secondary"/>
+        <p class="fig-caption">
+          <b>Hybrid-data progressive curriculum learning.</b>
+          HarmoHOI is trained in three stages of increasing geometric fidelity and multi-view consistency:
+          (1) in-the-wild single-view HOI videos with estimated depth for appearance–geometry correspondence;
+          (2) multi-view videos rendered in Unreal Engine for cross-view appearance consistency;
+          (3) lab-captured multi-view HOI videos with 3D motion tracks for joint appearance–geometry learning.
+          This curriculum preserves pretrained video priors while progressively injecting multi-view geometric awareness.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div id="demos"></div>
+  
+  <section class="section hero is-light" id="sec-0">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <h2 class="title is-3 has-text-centered">Multi-view Synchronized HOI Appearance & Geometry</h2>
+        <p class="subtitle is-6 has-text-centered section-desc">Synchronized multi-view HOI videos with jointly generated 3D motion.</p>
+        
+        <div class="demo-card">
+          <h3 class="subtitle is-5">Case 1: Use spatula to scrape the bowl.</h3>
+          <div class="view-row"><div class="view-cell"><video class="thumb" playsinline muted loop preload="metadata" controls><source src="static/videos/multiview_sync/case1_v1.mp4" type="video/mp4"></video></div><div class="view-cell"><video class="thumb" playsinline muted loop preload="metadata" controls><source src="static/videos/multiview_sync/case1_v2.mp4" type="video/mp4"></video></div><div class="view-cell"><video class="thumb" playsinline muted loop preload="metadata" controls><source src="static/videos/multiview_sync/case1_v3.mp4" type="video/mp4"></video></div></div>
+          <div class="main-video"><video class="wide" playsinline muted loop preload="metadata" controls><source src="static/videos/multiview_sync/case1.mp4" type="video/mp4"></video></div>
+        </div>
+        <div class="demo-card">
+          <h3 class="subtitle is-5">Case 2: Use spatula to scrape the pan.</h3>
+          <div class="view-row"><div class="view-cell"><video class="thumb" playsinline muted loop preload="metadata" controls><source src="static/videos/multiview_sync/case2_v1.mp4" type="video/mp4"></video></div><div class="view-cell"><video class="thumb" playsinline muted loop preload="metadata" controls><source src="static/videos/multiview_sync/case2_v2.mp4" type="video/mp4"></video></div><div class="view-cell"><video class="thumb" playsinline muted loop preload="metadata" controls><source src="static/videos/multiview_sync/case2_v3.mp4" type="video/mp4"></video></div></div>
+          <div class="main-video"><video class="wide" playsinline muted loop preload="metadata" controls><source src="static/videos/multiview_sync/case2.mp4" type="video/mp4"></video></div>
+        </div>
+        <div class="demo-card">
+          <h3 class="subtitle is-5">Case 3: Use brush to scrape the pot.</h3>
+          <div class="view-row"><div class="view-cell"><video class="thumb" playsinline muted loop preload="metadata" controls><source src="static/videos/multiview_sync/case3_v1.mp4" type="video/mp4"></video></div><div class="view-cell"><video class="thumb" playsinline muted loop preload="metadata" controls><source src="static/videos/multiview_sync/case3_v2.mp4" type="video/mp4"></video></div><div class="view-cell"><video class="thumb" playsinline muted loop preload="metadata" controls><source src="static/videos/multiview_sync/case3_v3.mp4" type="video/mp4"></video></div></div>
+          <div class="main-video"><video class="wide" playsinline muted loop preload="metadata" controls><source src="static/videos/multiview_sync/case3.mp4" type="video/mp4"></video></div>
+        </div>
+        <div class="demo-card">
+          <h3 class="subtitle is-5">Case 4: Use shovel to shovel the plate.</h3>
+          <div class="view-row"><div class="view-cell"><video class="thumb" playsinline muted loop preload="metadata" controls><source src="static/videos/multiview_sync/case4_v1.mp4" type="video/mp4"></video></div><div class="view-cell"><video class="thumb" playsinline muted loop preload="metadata" controls><source src="static/videos/multiview_sync/case4_v2.mp4" type="video/mp4"></video></div><div class="view-cell"><video class="thumb" playsinline muted loop preload="metadata" controls><source src="static/videos/multiview_sync/case4_v3.mp4" type="video/mp4"></video></div></div>
+          <div class="main-video"><video class="wide" playsinline muted loop preload="metadata" controls><source src="static/videos/multiview_sync/case4.mp4" type="video/mp4"></video></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section hero " id="sec-1">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <h2 class="title is-3 has-text-centered">Unseen Generalization for Multi-view HOI</h2>
+        <p class="subtitle is-6 has-text-centered section-desc">Generalization to unseen object–tool combinations.</p>
+        
+        <div class="demo-card">
+          <h3 class="subtitle is-5">Case 1: Use ruler to measure the wheel.</h3>
+          <div class="view-row cols-3"><div class="view-cell"><video class="thumb" playsinline muted loop preload="metadata" controls><source src="static/videos/unseen/case1_v1.mp4" type="video/mp4"></video></div><div class="view-cell"><video class="thumb" playsinline muted loop preload="metadata" controls><source src="static/videos/unseen/case1_v10.mp4" type="video/mp4"></video></div><div class="view-cell"><video class="thumb" playsinline muted loop preload="metadata" controls><source src="static/videos/unseen/case1_v11.mp4" type="video/mp4"></video></div><div class="view-cell"><video class="thumb" playsinline muted loop preload="metadata" controls><source src="static/videos/unseen/case1_v12.mp4" type="video/mp4"></video></div><div class="view-cell"><video class="thumb" playsinline muted loop preload="metadata" controls><source src="static/videos/unseen/case1_v2.mp4" type="video/mp4"></video></div><div class="view-cell"><video class="thumb" playsinline muted loop preload="metadata" controls><source src="static/videos/unseen/case1_v3.mp4" type="video/mp4"></video></div></div>
+          <div class="main-video"><video class="wide" playsinline muted loop preload="metadata" controls><source src="static/videos/unseen/case1.mp4" type="video/mp4"></video></div>
+        </div>
+        <div class="demo-card">
+          <h3 class="subtitle is-5">Case 2: Use hammer to hit the gun.</h3>
+          <div class="view-row cols-3"><div class="view-cell"><video class="thumb" playsinline muted loop preload="metadata" controls><source src="static/videos/unseen/case2_v1.mp4" type="video/mp4"></video></div><div class="view-cell"><video class="thumb" playsinline muted loop preload="metadata" controls><source src="static/videos/unseen/case2_v10.mp4" type="video/mp4"></video></div><div class="view-cell"><video class="thumb" playsinline muted loop preload="metadata" controls><source src="static/videos/unseen/case2_v11.mp4" type="video/mp4"></video></div><div class="view-cell"><video class="thumb" playsinline muted loop preload="metadata" controls><source src="static/videos/unseen/case2_v12.mp4" type="video/mp4"></video></div><div class="view-cell"><video class="thumb" playsinline muted loop preload="metadata" controls><source src="static/videos/unseen/case2_v2.mp4" type="video/mp4"></video></div><div class="view-cell"><video class="thumb" playsinline muted loop preload="metadata" controls><source src="static/videos/unseen/case2_v3.mp4" type="video/mp4"></video></div></div>
+          <div class="main-video"><video class="wide" playsinline muted loop preload="metadata" controls><source src="static/videos/unseen/case2.mp4" type="video/mp4"></video></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section hero is-light" id="sec-2">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <h2 class="title is-3 has-text-centered">In-the-wild Single-view Appearance & Geometry</h2>
+        <p class="subtitle is-6 has-text-centered section-desc">Joint appearance and geometry on diverse in-the-wild single-view HOI videos.</p>
+        
+        <div class="demo-card">
+          <h3 class="subtitle is-5">Case 1: Make a pizza.</h3>
+          <div class="triple-grid">
+            <div><div class="label">RGB Video</div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_single/case1_rgb.mp4" type="video/mp4"></video></div></div>
+            <div><div class="label">Motion Video</div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_single/case1_motion.mp4" type="video/mp4"></video></div></div>
+            <div><div class="label">3D Points Track</div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_single/case1_track.mp4" type="video/mp4"></video></div></div>
+          </div>
+        </div>
+        <div class="demo-card">
+          <h3 class="subtitle is-5">Case 2: Mix white liquid with mixer.</h3>
+          <div class="triple-grid">
+            <div><div class="label">RGB Video</div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_single/case2_rgb.mp4" type="video/mp4"></video></div></div>
+            <div><div class="label">Motion Video</div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_single/case2_motion.mp4" type="video/mp4"></video></div></div>
+            <div><div class="label">3D Points Track</div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_single/case2_track.mp4" type="video/mp4"></video></div></div>
+          </div>
+        </div>
+        <!-- <div class="demo-card">
+          <h3 class="subtitle is-5">Case 3: Remove the blue-silver smart device.</h3>
+          <div class="triple-grid">
+            <div><div class="label">RGB Video</div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_single/case3_rgb.mp4" type="video/mp4"></video></div></div>
+            <div><div class="label">Motion Video</div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_single/case3_motion.mp4" type="video/mp4"></video></div></div>
+            <div><div class="label">3D Points Track</div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_single/case3_track.mp4" type="video/mp4"></video></div></div>
+          </div>
+        </div> -->
+        <!-- <div class="demo-card">
+          <h3 class="subtitle is-5">Case 4: Chop the chili peppers.</h3>
+          <div class="triple-grid">
+            <div><div class="label">RGB Video</div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_single/case4_rgb.mp4" type="video/mp4"></video></div></div>
+            <div><div class="label">Motion Video</div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_single/case4_motion.mp4" type="video/mp4"></video></div></div>
+            <div><div class="label">3D Points Track</div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_single/case4_track.mp4" type="video/mp4"></video></div></div>
+          </div>
+        </div>
+        <div class="demo-card">
+          <h3 class="subtitle is-5">Case 5: Break the cookies into pieces.</h3>
+          <div class="triple-grid">
+            <div><div class="label">RGB Video</div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_single/case5_rgb.mp4" type="video/mp4"></video></div></div>
+            <div><div class="label">Motion Video</div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_single/case5_motion.mp4" type="video/mp4"></video></div></div>
+            <div><div class="label">3D Points Track</div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_single/case5_track.mp4" type="video/mp4"></video></div></div>
+          </div>
+        </div> -->
+        <!-- <div class="demo-card">
+          <h3 class="subtitle is-5">Case 6: Unfasten the ribbon on the cake.</h3>
+          <div class="triple-grid">
+            <div><div class="label">RGB Video</div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_single/case6_rgb.mp4" type="video/mp4"></video></div></div>
+            <div><div class="label">Motion Video</div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_single/case6_motion.mp4" type="video/mp4"></video></div></div>
+            <div><div class="label">3D Points Track</div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_single/case6_track.mp4" type="video/mp4"></video></div></div>
+          </div>
+        </div>
+        <div class="demo-card">
+          <h3 class="subtitle is-5">Case 7: Making fruit and vegetable juice.</h3>
+          <div class="triple-grid">
+            <div><div class="label">RGB Video</div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_single/case7_rgb.mp4" type="video/mp4"></video></div></div>
+            <div><div class="label">Motion Video</div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_single/case7_motion.mp4" type="video/mp4"></video></div></div>
+            <div><div class="label">3D Points Track</div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_single/case7_track.mp4" type="video/mp4"></video></div></div>
+          </div>
+        </div>
+        <div class="demo-card">
+          <h3 class="subtitle is-5">Case 8: Cutting vegetables on the chopping board.</h3>
+          <div class="triple-grid">
+            <div><div class="label">RGB Video</div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_single/case8_rgb.mp4" type="video/mp4"></video></div></div>
+            <div><div class="label">Motion Video</div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_single/case8_motion.mp4" type="video/mp4"></video></div></div>
+            <div><div class="label">3D Points Track</div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_single/case8_track.mp4" type="video/mp4"></video></div></div>
+          </div>
+        </div>
+        <div class="demo-card">
+          <h3 class="subtitle is-5">Case 9: Have a glass of champagne.</h3>
+          <div class="triple-grid">
+            <div><div class="label">RGB Video</div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_single/case9_rgb.mp4" type="video/mp4"></video></div></div>
+            <div><div class="label">Motion Video</div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_single/case9_motion.mp4" type="video/mp4"></video></div></div>
+            <div><div class="label">3D Points Track</div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_single/case9_track.mp4" type="video/mp4"></video></div></div>
+          </div>
+        </div> -->
+        <div class="demo-card">
+          <h3 class="subtitle is-5">Case 3: Arrange the wooden blocks.</h3>
+          <div class="triple-grid">
+            <div><div class="label">RGB Video</div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_single/case10_rgb.mp4" type="video/mp4"></video></div></div>
+            <div><div class="label">Motion Video</div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_single/case10_motion.mp4" type="video/mp4"></video></div></div>
+            <div><div class="label">3D Points Track</div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_single/case10_track.mp4" type="video/mp4"></video></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section hero " id="sec-3">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <h2 class="title is-3 has-text-centered">In-the-wild Multi-view Appearance Consistency</h2>
+        <p class="subtitle is-6 has-text-centered section-desc">Multi-view consistent generation from in-the-wild prompts.</p>
+        
+        <div class="demo-card">
+          <h3 class="subtitle is-5">Case 1</h3>
+          <p class="prompt">Close-up of hands in a green apron slicing red chilies on a dark wooden board.</p>
+          <div class="view-row cols-3"><div class="view-cell"><video class="thumb" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_multiview/case1_v1.mp4" type="video/mp4"></video></div><div class="view-cell"><video class="thumb" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_multiview/case1_v2.mp4" type="video/mp4"></video></div><div class="view-cell"><video class="thumb" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_multiview/case1_v3.mp4" type="video/mp4"></video></div><div class="view-cell"><video class="thumb" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_multiview/case1_v4.mp4" type="video/mp4"></video></div><div class="view-cell"><video class="thumb" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_multiview/case1_v5.mp4" type="video/mp4"></video></div><div class="view-cell"><video class="thumb" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_multiview/case1_v6.mp4" type="video/mp4"></video></div></div>
+          <div class="main-video"><video class="wide" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_multiview/case1.mp4" type="video/mp4"></video></div>
+        </div>
+        <div class="demo-card">
+          <h3 class="subtitle is-5">Case 2</h3>
+          <p class="prompt">A person making dumplings, right hand holding a spoon, lightly tapping the filling on the left palm.</p>
+          <div class="view-row cols-3"><div class="view-cell"><video class="thumb" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_multiview/case2_v1.mp4" type="video/mp4"></video></div><div class="view-cell"><video class="thumb" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_multiview/case2_v2.mp4" type="video/mp4"></video></div><div class="view-cell"><video class="thumb" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_multiview/case2_v3.mp4" type="video/mp4"></video></div><div class="view-cell"><video class="thumb" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_multiview/case2_v4.mp4" type="video/mp4"></video></div><div class="view-cell"><video class="thumb" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_multiview/case2_v5.mp4" type="video/mp4"></video></div><div class="view-cell"><video class="thumb" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_multiview/case2_v6.mp4" type="video/mp4"></video></div></div>
+          <div class="main-video"><video class="wide" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_multiview/case2.mp4" type="video/mp4"></video></div>
+        </div>
+        <div class="demo-card">
+          <h3 class="subtitle is-5">Case 3</h3>
+          <p class="prompt">A person rolling dough on a board, pushing and pulling a rolling pin back and forth.</p>
+          <div class="view-row cols-3"><div class="view-cell"><video class="thumb" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_multiview/case3_v1.mp4" type="video/mp4"></video></div><div class="view-cell"><video class="thumb" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_multiview/case3_v2.mp4" type="video/mp4"></video></div><div class="view-cell"><video class="thumb" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_multiview/case3_v3.mp4" type="video/mp4"></video></div><div class="view-cell"><video class="thumb" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_multiview/case3_v4.mp4" type="video/mp4"></video></div><div class="view-cell"><video class="thumb" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_multiview/case3_v5.mp4" type="video/mp4"></video></div><div class="view-cell"><video class="thumb" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_multiview/case3_v6.mp4" type="video/mp4"></video></div></div>
+          <div class="main-video"><video class="wide" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_multiview/case3.mp4" type="video/mp4"></video></div>
+        </div>
+        <div class="demo-card">
+          <h3 class="subtitle is-5">Case 4</h3>
+          <p class="prompt">A person slicing green zucchini on a cutting board with a kitchen knife.</p>
+          <div class="view-row cols-3"><div class="view-cell"><video class="thumb" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_multiview/case4_v1.mp4" type="video/mp4"></video></div><div class="view-cell"><video class="thumb" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_multiview/case4_v2.mp4" type="video/mp4"></video></div><div class="view-cell"><video class="thumb" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_multiview/case4_v3.mp4" type="video/mp4"></video></div><div class="view-cell"><video class="thumb" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_multiview/case4_v4.mp4" type="video/mp4"></video></div><div class="view-cell"><video class="thumb" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_multiview/case4_v5.mp4" type="video/mp4"></video></div><div class="view-cell"><video class="thumb" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_multiview/case4_v6.mp4" type="video/mp4"></video></div></div>
+          <div class="main-video"><video class="wide" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_multiview/case4.mp4" type="video/mp4"></video></div>
+        </div>
+        <div class="demo-card">
+          <h3 class="subtitle is-5">Case 5</h3>
+          <p class="prompt">Asian woman walking barefoot on a sun-drenched tropical beach, photorealistic side-tracking shot.</p>
+          <div class="view-row cols-3"><div class="view-cell"><video class="thumb" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_multiview/case5_v1.mp4" type="video/mp4"></video></div><div class="view-cell"><video class="thumb" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_multiview/case5_v2.mp4" type="video/mp4"></video></div><div class="view-cell"><video class="thumb" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_multiview/case5_v3.mp4" type="video/mp4"></video></div><div class="view-cell"><video class="thumb" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_multiview/case5_v4.mp4" type="video/mp4"></video></div><div class="view-cell"><video class="thumb" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_multiview/case5_v5.mp4" type="video/mp4"></video></div><div class="view-cell"><video class="thumb" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_multiview/case5_v6.mp4" type="video/mp4"></video></div></div>
+          <div class="main-video"><video class="wide" playsinline muted loop preload="metadata" controls><source src="static/videos/wild_multiview/case5.mp4" type="video/mp4"></video></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section hero is-light" id="sec-4">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <h2 class="title is-3 has-text-centered">Comparison of Novel-view Videos</h2>
+        <p class="subtitle is-6 has-text-centered section-desc">Each case is a 4×6 grid: rows are methods (DaS / SynCamMaster / SV4D 2.0 / Ours); columns are Source View and View 2–6.</p>
+        
+                        <div class="demo-card">
+          <h3 class="subtitle is-5">Case 1</h3>
+          <div class="comp-grid">
+            <div class="comp-corner"></div>
+            <div class="comp-labels cols-6"><div class="label">Source View</div><div class="label">View 2</div><div class="label">View 3</div><div class="label">View 4</div><div class="label">View 5</div><div class="label">View 6</div></div>
+          <div class="comp-row-wrap">
+            <div class="row-label">DaS</div>
+            <div class="comp-row"><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case1_r0_c0.mp4" type="video/mp4"></video></div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case1_r0_c1.mp4" type="video/mp4"></video></div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case1_r0_c2.mp4" type="video/mp4"></video></div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case1_r0_c3.mp4" type="video/mp4"></video></div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case1_r0_c4.mp4" type="video/mp4"></video></div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case1_r0_c5.mp4" type="video/mp4"></video></div></div>
+          </div>
+          <div class="comp-row-wrap">
+            <div class="row-label">SynCamMaster</div>
+            <div class="comp-row"><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case1_r1_c0.mp4" type="video/mp4"></video></div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case1_r1_c1.mp4" type="video/mp4"></video></div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case1_r1_c2.mp4" type="video/mp4"></video></div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case1_r1_c3.mp4" type="video/mp4"></video></div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case1_r1_c4.mp4" type="video/mp4"></video></div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case1_r1_c5.mp4" type="video/mp4"></video></div></div>
+          </div>
+          <div class="comp-row-wrap">
+            <div class="row-label">SV4D 2.0</div>
+            <div class="comp-row"><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case1_r2_c0.mp4" type="video/mp4"></video></div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case1_r2_c1.mp4" type="video/mp4"></video></div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case1_r2_c2.mp4" type="video/mp4"></video></div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case1_r2_c3.mp4" type="video/mp4"></video></div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case1_r2_c4.mp4" type="video/mp4"></video></div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case1_r2_c5.mp4" type="video/mp4"></video></div></div>
+          </div>
+          <div class="comp-row-wrap">
+            <div class="row-label">Ours</div>
+            <div class="comp-row"><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case1_r3_c0.mp4" type="video/mp4"></video></div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case1_r3_c1.mp4" type="video/mp4"></video></div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case1_r3_c2.mp4" type="video/mp4"></video></div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case1_r3_c3.mp4" type="video/mp4"></video></div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case1_r3_c4.mp4" type="video/mp4"></video></div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case1_r3_c5.mp4" type="video/mp4"></video></div></div>
+          </div>
+          </div>
+        </div>
+        <div class="demo-card">
+          <h3 class="subtitle is-5">Case 2</h3>
+          <div class="comp-grid">
+            <div class="comp-corner"></div>
+            <div class="comp-labels cols-6"><div class="label">Source View</div><div class="label">View 2</div><div class="label">View 3</div><div class="label">View 4</div><div class="label">View 5</div><div class="label">View 6</div></div>
+          <div class="comp-row-wrap">
+            <div class="row-label">DaS</div>
+            <div class="comp-row"><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case2_r0_c0.mp4" type="video/mp4"></video></div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case2_r0_c1.mp4" type="video/mp4"></video></div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case2_r0_c2.mp4" type="video/mp4"></video></div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case2_r0_c3.mp4" type="video/mp4"></video></div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case2_r0_c4.mp4" type="video/mp4"></video></div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case2_r0_c5.mp4" type="video/mp4"></video></div></div>
+          </div>
+          <div class="comp-row-wrap">
+            <div class="row-label">SynCamMaster</div>
+            <div class="comp-row"><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case2_r1_c0.mp4" type="video/mp4"></video></div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case2_r1_c1.mp4" type="video/mp4"></video></div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case2_r1_c2.mp4" type="video/mp4"></video></div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case2_r1_c3.mp4" type="video/mp4"></video></div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case2_r1_c4.mp4" type="video/mp4"></video></div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case2_r1_c5.mp4" type="video/mp4"></video></div></div>
+          </div>
+          <div class="comp-row-wrap">
+            <div class="row-label">SV4D 2.0</div>
+            <div class="comp-row"><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case2_r2_c0.mp4" type="video/mp4"></video></div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case2_r2_c1.mp4" type="video/mp4"></video></div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case2_r2_c2.mp4" type="video/mp4"></video></div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case2_r2_c3.mp4" type="video/mp4"></video></div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case2_r2_c4.mp4" type="video/mp4"></video></div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case2_r2_c5.mp4" type="video/mp4"></video></div></div>
+          </div>
+          <div class="comp-row-wrap">
+            <div class="row-label">Ours</div>
+            <div class="comp-row"><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case2_r3_c0.mp4" type="video/mp4"></video></div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case2_r3_c1.mp4" type="video/mp4"></video></div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case2_r3_c2.mp4" type="video/mp4"></video></div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case2_r3_c3.mp4" type="video/mp4"></video></div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case2_r3_c4.mp4" type="video/mp4"></video></div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case2_r3_c5.mp4" type="video/mp4"></video></div></div>
+          </div>
+          </div>
+        </div>
+        <div class="demo-card">
+          <h3 class="subtitle is-5">Case 3</h3>
+          <div class="comp-grid">
+            <div class="comp-corner"></div>
+            <div class="comp-labels cols-6"><div class="label">Source View</div><div class="label">View 2</div><div class="label">View 3</div><div class="label">View 4</div><div class="label">View 5</div><div class="label">View 6</div></div>
+          <div class="comp-row-wrap">
+            <div class="row-label">DaS</div>
+            <div class="comp-row"><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case3_r0_c0.mp4" type="video/mp4"></video></div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case3_r0_c1.mp4" type="video/mp4"></video></div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case3_r0_c2.mp4" type="video/mp4"></video></div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case3_r0_c3.mp4" type="video/mp4"></video></div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case3_r0_c4.mp4" type="video/mp4"></video></div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case3_r0_c5.mp4" type="video/mp4"></video></div></div>
+          </div>
+          <div class="comp-row-wrap">
+            <div class="row-label">SynCamMaster</div>
+            <div class="comp-row"><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case3_r1_c0.mp4" type="video/mp4"></video></div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case3_r1_c1.mp4" type="video/mp4"></video></div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case3_r1_c2.mp4" type="video/mp4"></video></div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case3_r1_c3.mp4" type="video/mp4"></video></div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case3_r1_c4.mp4" type="video/mp4"></video></div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case3_r1_c5.mp4" type="video/mp4"></video></div></div>
+          </div>
+          <div class="comp-row-wrap">
+            <div class="row-label">SV4D 2.0</div>
+            <div class="comp-row"><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case3_r2_c0.mp4" type="video/mp4"></video></div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case3_r2_c1.mp4" type="video/mp4"></video></div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case3_r2_c2.mp4" type="video/mp4"></video></div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case3_r2_c3.mp4" type="video/mp4"></video></div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case3_r2_c4.mp4" type="video/mp4"></video></div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case3_r2_c5.mp4" type="video/mp4"></video></div></div>
+          </div>
+          <div class="comp-row-wrap">
+            <div class="row-label">Ours</div>
+            <div class="comp-row"><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case3_r3_c0.mp4" type="video/mp4"></video></div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case3_r3_c1.mp4" type="video/mp4"></video></div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case3_r3_c2.mp4" type="video/mp4"></video></div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case3_r3_c3.mp4" type="video/mp4"></video></div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case3_r3_c4.mp4" type="video/mp4"></video></div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_video/case3_r3_c5.mp4" type="video/mp4"></video></div></div>
+          </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </section>
+  <section class="section hero " id="sec-5">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <h2 class="title is-3 has-text-centered">Comparison of 3D Motions</h2>
+        <p class="subtitle is-6 has-text-centered section-desc">Comparison against Geo4D, Depth Anything 3, and GeoCrafter.</p>
+        
+                <div class="demo-card">
+          <h3 class="subtitle is-5">Case 1: Pour water from the kettle into the bowl.</h3>
+          <div class="quad-grid"><div><div class="label">Geo4D</div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_motion/case1_0.mp4" type="video/mp4"></video></div></div><div><div class="label">Depth Anything 3</div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_motion/case1_1.mp4" type="video/mp4"></video></div></div><div><div class="label">GeoCrafter</div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_motion/case1_2.mp4" type="video/mp4"></video></div></div><div><div class="label">Ours</div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_motion/case1_3.mp4" type="video/mp4"></video></div></div></div>
+        </div>
+        <div class="demo-card">
+          <h3 class="subtitle is-5">Case 2: Use a brush to scrub the pot.</h3>
+          <div class="quad-grid"><div><div class="label">Geo4D</div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_motion/case2_0.mp4" type="video/mp4"></video></div></div><div><div class="label">Depth Anything 3</div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_motion/case2_1.mp4" type="video/mp4"></video></div></div><div><div class="label">GeoCrafter</div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_motion/case2_2.mp4" type="video/mp4"></video></div></div><div><div class="label">Ours</div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_motion/case2_3.mp4" type="video/mp4"></video></div></div></div>
+        </div>
+        <div class="demo-card">
+          <h3 class="subtitle is-5">Case 3: Scrape the plate with a spatula.</h3>
+          <div class="quad-grid"><div><div class="label">Geo4D</div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_motion/case3_0.mp4" type="video/mp4"></video></div></div><div><div class="label">Depth Anything 3</div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_motion/case3_1.mp4" type="video/mp4"></video></div></div><div><div class="label">GeoCrafter</div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_motion/case3_2.mp4" type="video/mp4"></video></div></div><div><div class="label">Ours</div><div class="media-frame"><video class="cell" playsinline muted loop preload="metadata" controls><source src="static/videos/comparison_motion/case3_3.mp4" type="video/mp4"></video></div></div></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section hero is-light" id="bibtex">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="bibtex-card">
+          <button id="copy-bibtex" class="button is-small is-rounded is-dark bibtex-copy" type="button">
+            <span class="icon"><i class="fas fa-copy"></i></span>
+            <span>Copy BibTeX</span>
+          </button>
+          <pre id="bibtex-code" class="bibtex-code">
+            <code>@misc{dang2026harmohoiharmonizingappearance3d,
+              title={HarmoHOI: Harmonizing Appearance and 3D Motion for Multi-view Hand-Object Interaction Synthesis},
+              author={Lingwei Dang and Juntong Li and Zonghan Li and Hongwen Zhang and Liang An and Wei Min and Yebin Liu and Qingyao Wu},
+              year={2026},
+              eprint={2607.17097},
+              archivePrefix={arXiv},
+              primaryClass={cs.CV},
+              url={https://arxiv.org/abs/2607.17097},
+            }</code>
+        </pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="content has-text-centered">
+        <p>
+          <b>HarmoHOI</b> project page.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Copy BibTeX to clipboard
+    (function () {
+      const btn = document.getElementById('copy-bibtex');
+      const code = document.getElementById('bibtex-code');
+      if (!btn || !code) return;
+      btn.addEventListener('click', async () => {
+        const text = code.textContent;
+        try {
+          await navigator.clipboard.writeText(text);
+          const label = btn.querySelector('span:last-child');
+          const old = label.textContent;
+          label.textContent = 'Copied!';
+          setTimeout(() => { label.textContent = old; }, 2000);
+        } catch (err) {
+          const ta = document.createElement('textarea');
+          ta.value = text;
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand('copy');
+          document.body.removeChild(ta);
+        }
+      });
+    })();
+
+    // Pause offscreen videos to keep local browsing responsive
+    (function () {
+      const videos = Array.from(document.querySelectorAll('video'));
+      if (!('IntersectionObserver' in window)) return;
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          const v = e.target;
+          if (e.isIntersecting) {
+            // do not autoplay; user controls playback
+          } else if (!v.paused) {
+            v.pause();
+          }
+        });
+      }, { rootMargin: '200px' });
+      videos.forEach((v) => io.observe(v));
+    })();
+  </script>
+</body>
+</html>
