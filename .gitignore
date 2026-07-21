@@ -1,0 +1,5 @@
+.DS_Store
+__pycache__/
+*.pyc
+*.tmp.mp4
+static/videos/comparison_motion_raw/

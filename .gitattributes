@@ -1,0 +1,14 @@
+# Git LFS: large binary assets for the project page
+static/videos/** filter=lfs diff=lfs merge=lfs -text
+static/images/** filter=lfs diff=lfs merge=lfs -text
+
+# Keep source files as normal git objects
+*.html text
+*.css text
+*.js text
+*.py text
+*.md text
+*.json text
+*.svg text
+static/images/** !text !filter !merge !diff
+static/videos/** !text !filter !merge !diff
